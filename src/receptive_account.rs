@@ -19,7 +19,7 @@ impl ReceptiveAccount {
     pub fn balance(&self) -> Pesos {
         self.transactions
             .iter()
-            .map(|t| t.value())
+            .map(|t| t.balance())
             .sum()
     }
 

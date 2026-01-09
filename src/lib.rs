@@ -1,4 +1,4 @@
-use std::iter::Sum;
+use std::{iter::Sum, ops::Neg};
 
 pub mod receptive_account;
 pub mod transactions;
@@ -21,5 +21,13 @@ impl Sum for Pesos {
     fn sum<I: Iterator<Item = Self>>(iter: I) -> Self {
         let total = iter.fold(0, |acc, pesos| acc + pesos.value);
         Pesos::new(total)
+    }
+}
+
+impl Neg for Pesos {
+    type Output = Pesos;
+
+    fn neg(self) -> Self::Output {
+        Pesos::new(-self.value)
     }
 }

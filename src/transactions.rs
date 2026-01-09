@@ -6,6 +6,7 @@ use crate::receptive_account::ReceptiveAccount;
 
 pub trait Transaction {
     fn value(&self) -> Pesos;
+    fn balance(&self) -> Pesos;
     // Necesario para hasRegistered (identidad)
     fn as_any(&self) -> &dyn Any;
 }
@@ -31,6 +32,10 @@ impl Deposit {
 
 impl Transaction for Deposit {
     fn value(&self) -> Pesos {
+        self.amount
+    }
+
+    fn balance(&self) -> Pesos {
         self.amount
     }
 
@@ -61,6 +66,10 @@ impl Withdraw {
 impl Transaction for Withdraw {
     fn value(&self) -> Pesos {
         self.amount
+    }
+
+    fn balance(&self) -> Pesos {
+        -self.amount
     }
 
     fn as_any(&self) -> &dyn Any {
